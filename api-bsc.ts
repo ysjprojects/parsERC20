@@ -145,7 +145,7 @@ async function getHistoricalTokensBEP20(address, metadata=false, startblock=0, e
     
 }
 
-export {
-    getTokensBEP20,
-    getHistoricalTokensBEP20
+module.exports = {
+    getTokensBEP20: getTokensBEP20,
+    getHistoricalTokensBEP20: getHistoricalTokensBEP20
 }

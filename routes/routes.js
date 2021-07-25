@@ -146,4 +146,4 @@ router.get("/api/multi/bsc", [
     express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
     express_validator_1.query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
 ], getBEP20TokensOfAddresses);
-exports.default = router;
+module.exports = router;
