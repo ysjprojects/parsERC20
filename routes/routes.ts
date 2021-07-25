@@ -177,5 +177,5 @@ router.get("/api/multi/bsc", [
     )
 
 
-module.exports = router;
+export default router;
 

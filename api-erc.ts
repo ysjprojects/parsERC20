@@ -145,9 +145,8 @@ async function getHistoricalTokensERC20(address, metadata=false, startblock=0, e
     
 }
 
-module.exports = {
-    getTokensERC20: getTokensERC20,
-    getHistoricalTokensERC20: getHistoricalTokensERC20
+export default {
+    getTokensERC20,
+    getHistoricalTokensERC20
 }
 
-getTokensERC20({address:"0x4e83362442b8d1bec281594cea3050c8eb01311c",metadata:true}).then(res=>{console.log(res)})

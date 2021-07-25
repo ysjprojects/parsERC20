@@ -13,7 +13,6 @@ const express_validator_1 = require("express-validator");
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { requiresAuth } = require('express-openid-connect');
 const APIERC = require("../api-erc.ts");
 const APIBSC = require("../api-bsc.ts");
 const getERC20TokensOfAddress = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -147,4 +146,4 @@ router.get("/api/multi/bsc", [
     express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
     express_validator_1.query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
 ], getBEP20TokensOfAddresses);
-module.exports = router;
+exports.default = router;
