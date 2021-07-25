@@ -1,9 +1,8 @@
 {
   "name": "parserc20",
   "version": "1.0.0",
-  "type": "module",
   "description": "ERC20 API with Node.js, Express and Typescript",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "serve": "nodemon app.ts",
     "build": "tsc --project ./"
