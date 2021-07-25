@@ -5,7 +5,6 @@ require('dotenv').config()
 
 const express = require('express');
 const router = express.Router();
-const { requiresAuth } = require('express-openid-connect')
 
 const APIERC = require("../api-erc.ts")
 const APIBSC = require("../api-bsc.ts")
