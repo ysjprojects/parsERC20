@@ -1,0 +1,65 @@
+.text-center {
+    text-align:center;
+}
+
+.project-img-div {
+    width: 100px;    
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.project-img {
+    max-width:100%;
+    max-height:100%;
+}
+
+.top-container-div {
+    background: #77A1D3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E684AE, #79CBCA, #77A1D3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E684AE, #79CBCA, #77A1D3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding:30px;
+
+}
+.main-img-div {
+    width: 175px;    
+    height: 175px;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.main-img {
+    max-width:100%;
+    max-height:100%;
+}
+
+.margin-bottom-15{
+    margin-bottom: 15px;
+}
+
+.api-card{
+    padding: 0 !important;
+    
+}
+
+.api-url{
+    display: inline;
+    font-size: 1rem;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.api-endpoint-description {
+    margin-bottom: 0px !important;
+    margin-top:15px;
+}
+
+hr{
+    margin:0.375rem 0 !important;
+}
+
+.mr-2, .mx-2 {
+	margin-right: .5rem !important;
+}

@@ -1,0 +1,126 @@
+extends base.pug
+
+block content
+  body
+    div.top-container-div
+      div.main-img-div
+        img.main-img(src="/public/images/logo-transparent.png" alt="parsERC20")
+      div.text-center
+          h1.text-center parsERC20
+          h3.text-center
+            i kekapi
+    div.container(style="margin-top:30px")
+      .card
+        h4.card-header Introduction
+        .card-body
+          p.card-text 
+            | parsERC20 allows users to get the balance of existing ERC20 tokens in a wallet programmatically. 
+          p.card-text 
+            | Prior to parsERC20, users have to resort to #[a(href="https://etherscan.io" target="_blank") Etherscan] in order to find out the existing ERC20 tokens in an wallet. The only way to parse through an ERC20 wallet programmatically is via web scraping, which is against Etherscan's TOS.
+          p.card-text 
+            | With parsERC20, users can simply call our GET endpoints with the wallet of interest and our service will return a list of existing ERC20 tokens in the wallet together with their balance. 
+            | Currently, our service works on the #[strong Ethereum] and #[strong Binance Smart Chain] network. We will add more networks in the future according to user demand. 
+          p.card-text 
+            | Our API service is rate limited at 30 requests per hour. Please contact us if you need to raise the rate limit:
+          p.card-text 
+            | #[a(href='mailto:dev@kekapi.com') dev@kekapi.com]
+      div(style="height:30px")
+      .card(style="border-bottom-left-radius:0;border-bottom-right-radius:0")
+        h4.card-header Endpoints
+        .card-body
+          h5.card-title Ethereum
+          p.api-endpoint-description Get ERC20 tokens in wallet
+          hr
+          .card
+            .card-body.api-card
+              .btn.btn-success(style='width:75px' type='button')
+                b GET
+              span.api-url
+                b /api/erc/{address}
+          br
+          p 
+            i Optional parameters
+          .btn-toolbar(role='toolbar' aria-label='Toolbar with button groups')
+            .btn-group.mr-2(role='group' aria-label='First group')
+              button.btn.btn-primary(type='button') detailed
+              button.btn.btn-success(type='button') Boolean
+
+            .btn-group.mr-2(role='group' aria-label='Second group')
+              button.btn.btn-primary(type='button') metadata
+              button.btn.btn-success(type='button') Boolean
+
+            .btn-group.mr-2(role='group' aria-label='FThird group')
+              button.btn.btn-primary(type='button') startblock
+              button.btn.btn-warning(type='button') Integer
+
+            .btn-group(role='group' aria-label='Fourth group')
+              button.btn.btn-primary(type='button') tokens
+              button.btn.btn-danger(type='button') String[]
+          br
+          p 
+            i example
+          .card
+            .card-body.api-card
+              .btn.btn-success(style='width:75px' type='button')
+                b GET
+              span.api-url
+                b /api/erc/0xABC?detailed=true&metadata=false&startblock=0&tokens=0xGHI&tokens=0xOPQ
+        
+      .card(style="border-radius:0")
+        .card-body
+          h5.card-title Binance Smart Chain
+          p.api-endpoint-description Get BEP20 tokens in wallet
+          hr
+          .card
+            .card-body.api-card
+              .btn.btn-success(style='width:75px' type='button')
+                b GET
+              span.api-url
+                b /api/bsc/{address}
+          br
+          p 
+            i Optional parameters
+          .btn-toolbar(role='toolbar' aria-label='Toolbar with button groups')
+            .btn-group.mr-2(role='group' aria-label='First group')
+              button.btn.btn-primary(type='button') detailed
+              button.btn.btn-success(type='button') Boolean
+
+            .btn-group.mr-2(role='group' aria-label='Second group')
+              button.btn.btn-primary(type='button') metadata
+              button.btn.btn-success(type='button') Boolean
+
+            .btn-group.mr-2(role='group' aria-label='FThird group')
+              button.btn.btn-primary(type='button') startblock
+              button.btn.btn-warning(type='button') Integer
+
+            .btn-group(role='group' aria-label='Fourth group')
+              button.btn.btn-primary(type='button') tokens
+              button.btn.btn-danger(type='button') String[]
+          br
+          p 
+            i example
+          .card
+            .card-body.api-card
+              .btn.btn-success(style='width:75px' type='button')
+                b GET
+              span.api-url
+                b /api/bsc/0xABC?detailed=false&metadata=false&startblock=15231094&tokens=0xDEF&tokens=0xXYZ
+      .card(style="border-top-left-radius:0;border-top-right-radius:0")
+        .card-body
+          p(style="margin-bottom:0.375rem") *replace texts in curly braces {} with the relevant parameters
+          p(style="margin-bottom:0.375rem") *base url is the current url of this page
+      div(style="height:30px")
+
+      .card
+        h4.card-header Acknowledgement
+        .card-body
+          p.card-text Written in Typescript and Pug 
+          p.card-text Built with ExpressJS
+          p.card-text 
+            | External services used:
+            | web3, EtherscanAPI, BscscanAPI 
+          p.card-text hosted on DigitalOcean
+
+      div(style="height:30px")
+      
+
