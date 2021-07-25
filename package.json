@@ -1,6 +1,7 @@
 {
   "name": "parserc20",
   "version": "1.0.0",
+  "type": "module",
   "description": "ERC20 API with Node.js, Express and Typescript",
   "main": "index.js",
   "scripts": {
@@ -24,19 +25,9 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "express-openid-connect": "^2.5.0",
     "express-rate-limit": "^5.3.0",
     "express-validator": "^6.12.0",
-    "helmet": "^4.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^2.0.4",
     "lodash": "^4.17.21",
-    "mongodb-memory-server": "^7.2.1",
-    "mongoose": "^5.13.3",
-    "morgan": "^1.10.0",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
     "pug": "^3.0.2",
     "web3": "^1.4.0"
   }
