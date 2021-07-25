@@ -1,1 +1,1 @@
-web: npx nodemon app.ts
+web: npm run serve
