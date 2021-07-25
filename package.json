@@ -4,7 +4,7 @@
   "description": "ERC20 API with Node.js, Express and Typescript",
   "main": "app.js",
   "scripts": {
-    "serve": "tsnode app.ts",
+    "serve": "ts-node app.ts",
     "build": "tsc --project ./"
   },
   "author": "",
