@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "serve": "nodemon app.ts",
-    "build": "tsc && npm run serve"
+    "build": "tsc --project ./"
   },
   "author": "",
   "license": "MIT",
