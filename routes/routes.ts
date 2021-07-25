@@ -1,4 +1,3 @@
-export{}
 
 import { Request, Response, NextFunction} from 'express';
 import { query, validationResult, oneOf} from 'express-validator'
