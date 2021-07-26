@@ -1,13 +1,19 @@
 
 import { Request, Response, NextFunction} from 'express';
+import express from "express";
 import { query, validationResult, oneOf} from 'express-validator'
-require('dotenv').config()
+import * as dotenv from "dotenv"
+dotenv.config()
 
-const express = require('express');
+
+//require('dotenv').config()
+
+//const express = require('express');
 const router = express.Router();
-
-const APIERC = require("../api-erc.ts")
-const APIBSC = require("../api-bsc.ts")
+import * as APIERC from "../api-erc.js"
+import * as APIBSC from "../api-bsc.js"
+//const APIERC = require("../api-erc.ts")
+//const APIBSC = require("../api-bsc.ts")
 
 const getERC20TokensOfAddress = async (request: Request, response: Response, next: NextFunction) => {
   try {
@@ -17,8 +23,8 @@ const getERC20TokensOfAddress = async (request: Request, response: Response, nex
     let query = request.query 
     let detailed = query.detailed ? JSON.parse(query.detailed.toString()) : false
     let metadata = query.metadata  ? JSON.parse(query.metadata.toString()) : false
-    let startblock = query.startblock ? query.startblock : 0
-    let tokens = query.tokens ? query.tokens : []
+    let startblock = query.startblock ? JSON.parse(query.startblock.toString()) : 0
+    let tokens = query.tokens ? JSON.parse(query.tokens.toString()) : []
     let result = await APIERC.getTokensERC20({
       "address":address, 
       "detailed":detailed, 
@@ -79,14 +85,14 @@ const getBEP20TokensOfAddress = async (request: Request, response: Response, nex
     let query = request.query 
     let detailed = query.detailed ? JSON.parse(query.detailed.toString()) : false
     let metadata = query.metadata  ? JSON.parse(query.metadata.toString()) : false
-    let startblock = query.startblock ? query.startblock : 0
-    let tokens = query.tokens ? query.tokens : []
+    let startblock = query.startblock ? JSON.parse(query.startblock.toString()) : 0
+    let tokens = query.tokens ? JSON.parse(query.tokens.toString()) : []
     let result = await APIBSC.getTokensBEP20({
       "address":address, 
       "detailed":detailed, 
       "metadata":metadata, 
       "startblock":startblock, 
-      "existingERC20Tokens":tokens})
+      "existingBEP20Tokens":tokens})
                             
                       
     response.status(200).json({"result":result, "query":{"address": address,"detailed":detailed,"metadata":metadata,"startblock":startblock,"existingERC20Tokens":tokens}})
@@ -176,6 +182,5 @@ router.get("/api/multi/bsc", [
     ,getBEP20TokensOfAddresses
     )
 
-
-module.exports = router;
+export default router;
 

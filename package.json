@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "ERC20 API with Node.js, Express and Typescript",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "serve": "ts-node app.ts",
+    "serve": "node app.js",
     "build": "tsc --project ./"
   },
-  "author": "",
+  "author": "kekapi",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/express-rate-limit": "^5.1.3",
     "@types/node": "^16.3.2",
     "nodemon": "^2.0.12",
     "ts-node": "^10.1.0",

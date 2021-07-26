@@ -2,9 +2,12 @@
     "compilerOptions": {
       
       "target": "es6",
-      "module": "commonjs",
+      "module": "es6",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
       "rootDir": "./",
       "esModuleInterop": true,
+      "resolveJsonModule": true
     }
 }
   

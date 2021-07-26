@@ -1,12 +1,17 @@
 import axios from "axios"
 import Web3 from "web3"
-require('dotenv').config()
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+import * as fs from "fs"
 
 
 const APIKEYBSC = process.env.API_KEY_BSC
 const ENDPOINTBSC = "https://api.bscscan.com/api"
 
-const BEP20ABI = require("./BEP20ABI.json")
+const JSONStr = fs.readFileSync("./BEP20ABI.json","utf8")
+const BEP20ABI = JSON.parse(JSONStr)
+
 
 const rpcURL= "https://bsc-dataseed1.binance.org"
 const web3 = new Web3(rpcURL)
@@ -145,7 +150,7 @@ async function getHistoricalTokensBEP20(address, metadata=false, startblock=0, e
     
 }
 
-module.exports = {
-    getTokensBEP20: getTokensBEP20,
-    getHistoricalTokensBEP20: getHistoricalTokensBEP20
+export  {
+    getTokensBEP20,
+    getHistoricalTokensBEP20
 }

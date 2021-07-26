@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,22 +7,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_validator_1 = require("express-validator");
-require('dotenv').config();
-const express = require('express');
+import express from "express";
+import { query, validationResult } from 'express-validator';
+import * as dotenv from "dotenv";
+dotenv.config();
+//require('dotenv').config()
+//const express = require('express');
 const router = express.Router();
-const APIERC = require("../api-erc.ts");
-const APIBSC = require("../api-bsc.ts");
+import * as APIERC from "../api-erc.js";
+import * as APIBSC from "../api-bsc.js";
+//const APIERC = require("../api-erc.ts")
+//const APIBSC = require("../api-bsc.ts")
 const getERC20TokensOfAddress = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        express_validator_1.validationResult(request).throw();
+        validationResult(request).throw();
         let address = request.params.address;
         let query = request.query;
         let detailed = query.detailed ? JSON.parse(query.detailed.toString()) : false;
         let metadata = query.metadata ? JSON.parse(query.metadata.toString()) : false;
-        let startblock = query.startblock ? query.startblock : 0;
-        let tokens = query.tokens ? query.tokens : [];
+        let startblock = query.startblock ? JSON.parse(query.startblock.toString()) : 0;
+        let tokens = query.tokens ? JSON.parse(query.tokens.toString()) : [];
         let result = yield APIERC.getTokensERC20({
             "address": address,
             "detailed": detailed,
@@ -39,7 +42,7 @@ const getERC20TokensOfAddress = (request, response, next) => __awaiter(void 0, v
 });
 const getERC20TokensOfAddresses = (request, response, NextFunction) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        express_validator_1.validationResult(request).throw();
+        validationResult(request).throw();
         const maxNumAddresses = 20;
         let query = request.query;
         let addresses = query.addresses.toString().split(";");
@@ -68,19 +71,19 @@ const getERC20TokensOfAddresses = (request, response, NextFunction) => __awaiter
 });
 const getBEP20TokensOfAddress = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        express_validator_1.validationResult(request).throw();
+        validationResult(request).throw();
         let address = request.params.address;
         let query = request.query;
         let detailed = query.detailed ? JSON.parse(query.detailed.toString()) : false;
         let metadata = query.metadata ? JSON.parse(query.metadata.toString()) : false;
-        let startblock = query.startblock ? query.startblock : 0;
-        let tokens = query.tokens ? query.tokens : [];
+        let startblock = query.startblock ? JSON.parse(query.startblock.toString()) : 0;
+        let tokens = query.tokens ? JSON.parse(query.tokens.toString()) : [];
         let result = yield APIBSC.getTokensBEP20({
             "address": address,
             "detailed": detailed,
             "metadata": metadata,
             "startblock": startblock,
-            "existingERC20Tokens": tokens
+            "existingBEP20Tokens": tokens
         });
         response.status(200).json({ "result": result, "query": { "address": address, "detailed": detailed, "metadata": metadata, "startblock": startblock, "existingERC20Tokens": tokens } });
     }
@@ -90,7 +93,7 @@ const getBEP20TokensOfAddress = (request, response, next) => __awaiter(void 0, v
 });
 const getBEP20TokensOfAddresses = (request, response, NextFunction) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        express_validator_1.validationResult(request).throw();
+        validationResult(request).throw();
         const maxNumAddresses = 20;
         let query = request.query;
         let addresses = query.addresses.toString().split(";");
@@ -121,29 +124,29 @@ router.get('/', function (req, res, next) {
     res.render('index');
 });
 router.get("/api/erc/:address", [
-    express_validator_1.query('tokens').isArray().optional({ nullable: true }).withMessage("List of tokens only"),
-    express_validator_1.query('startblock').if(express_validator_1.query('tokens').exists()).notEmpty().isInt().withMessage("Integers only"),
-    express_validator_1.query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('secret').optional({ nullable: true }).equals(process.env.API_ADMIN_KEY).withMessage("incorrect secret")
+    query('tokens').isArray().optional({ nullable: true }).withMessage("List of tokens only"),
+    query('startblock').if(query('tokens').exists()).notEmpty().isInt().withMessage("Integers only"),
+    query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('secret').optional({ nullable: true }).equals(process.env.API_ADMIN_KEY).withMessage("incorrect secret")
 ], getERC20TokensOfAddress);
 router.get("/api/multi/erc", [
-    express_validator_1.query('addresses').exists().isString().withMessage("List of account addresses only"),
-    express_validator_1.query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
+    query('addresses').exists().isString().withMessage("List of account addresses only"),
+    query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
 ], getERC20TokensOfAddresses);
 router.get("/api/bsc/:address", [
-    express_validator_1.query('tokens').isArray().optional({ nullable: true }).withMessage("List of tokens only"),
-    express_validator_1.query('startblock').if(express_validator_1.query('tokens').exists()).notEmpty().isInt().withMessage("Integers only"),
-    express_validator_1.query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('secret').equals(process.env.API_ADMIN_KEY).optional({ nullable: true }).withMessage("incorrect secret")
+    query('tokens').isArray().optional({ nullable: true }).withMessage("List of tokens only"),
+    query('startblock').if(query('tokens').exists()).notEmpty().isInt().withMessage("Integers only"),
+    query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('secret').equals(process.env.API_ADMIN_KEY).optional({ nullable: true }).withMessage("incorrect secret")
 ], getBEP20TokensOfAddress);
 router.get("/api/multi/bsc", [
-    express_validator_1.query('addresses').exists().isString().withMessage("List of account addresses only"),
-    express_validator_1.query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
-    express_validator_1.query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
+    query('addresses').exists().isString().withMessage("List of account addresses only"),
+    query('detailed').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('metadata').isBoolean().optional({ nullable: true }).withMessage("Booleans only"),
+    query('secret').exists().equals(process.env.API_ADMIN_KEY).withMessage("Secret required for privileged route")
 ], getBEP20TokensOfAddresses);
-module.exports = router;
+export default router;

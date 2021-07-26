@@ -1,12 +1,16 @@
 
 import express from 'express';
-const rateLimit = require("express-rate-limit")
-require('dotenv').config()
+
+import rateLimit from "express-rate-limit"
+import * as path from "path"
+import router from "./routes/routes.js"
+import * as dotenv from "dotenv"
+dotenv.config()
 
 
-const http = require('http');
-const path = require('path');
-const router = require('./routes/routes.ts');
+
+const __dirname = path.resolve()
+
 
 
 const app = express();
@@ -44,6 +48,8 @@ app.use('/', router)
 app.listen(port, () => {
     console.log(`Listening on port:${port}`);
   });
+
+
 
 
 

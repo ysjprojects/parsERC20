@@ -1,12 +1,19 @@
 import axios from "axios"
 import Web3 from "web3"
-require('dotenv').config()
+import * as fs from "fs"
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+//require('dotenv').config()
 
 
 const APIKEYERC = process.env.API_KEY_ERC
 const ENDPOINTERC = "https://api.etherscan.io/api"
 
-const ERC20ABI = require("./ERC20ABI.json")
+const JSONStr = fs.readFileSync("./ERC20ABI.json","utf8")
+const ERC20ABI = JSON.parse(JSONStr)
+
+//const ERC20ABI = require("./ERC20ABI.json")
 
 const rpcURL= `https://mainnet.infura.io/v3/${process.env.API_KEY_INFURA_MAINNET}`
 const web3 = new Web3(rpcURL)
@@ -145,8 +152,8 @@ async function getHistoricalTokensERC20(address, metadata=false, startblock=0, e
     
 }
 
-module.exports = {
-    getTokensERC20: getTokensERC20,
-    getHistoricalTokensERC20: getHistoricalTokensERC20
+export {
+    getTokensERC20,
+    getHistoricalTokensERC20
 }
 
