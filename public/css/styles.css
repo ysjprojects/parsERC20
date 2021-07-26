@@ -63,3 +63,7 @@ hr{
 .mr-2, .mx-2 {
 	margin-right: .5rem !important;
 }
+
+.btn-group {
+    margin-bottom: .5rem !important;
+}
