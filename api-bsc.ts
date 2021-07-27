@@ -3,6 +3,8 @@ import Web3 from "web3"
 import * as dotenv from 'dotenv'
 dotenv.config()
 
+import adjustBalance from "./helpers/adjust-balance.js"
+
 import * as fs from "fs"
 
 
@@ -15,17 +17,6 @@ const BEP20ABI = JSON.parse(JSONStr)
 
 const rpcURL= "https://bsc-dataseed1.binance.org"
 const web3 = new Web3(rpcURL)
-
-
-const adjustBalance = (balance, decimals) => {
-    if  (balance.length <= decimals) {
-        return "0." + 0 * (decimals - balance.length) + balance
-    } else {
-        return (balance.slice(0,-1*decimals) + "." + balance.slice(-1*decimals))
-    }
-}
-
-
 
 
 async function getTokensBEP20({address, detailed=false, metadata=false, startblock=0,existingBEP20Tokens=[]}) {

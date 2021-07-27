@@ -3,6 +3,7 @@ import Web3 from "web3"
 import * as fs from "fs"
 import * as dotenv from 'dotenv'
 dotenv.config()
+import adjustBalance from "./helpers/adjust-balance.js"
 
 //require('dotenv').config()
 
@@ -17,15 +18,6 @@ const ERC20ABI = JSON.parse(JSONStr)
 
 const rpcURL= `https://mainnet.infura.io/v3/${process.env.API_KEY_INFURA_MAINNET}`
 const web3 = new Web3(rpcURL)
-
-
-const adjustBalance = (balance, decimals) => {
-    if  (balance.length <= decimals) {
-        return "0." + 0 * (decimals - balance.length) + balance
-    } else {
-        return (balance.slice(0,-1*decimals) + "." + balance.slice(-1*decimals))
-    }
-}
 
 
 

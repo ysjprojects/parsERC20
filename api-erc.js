@@ -12,6 +12,7 @@ import Web3 from "web3";
 import * as fs from "fs";
 import * as dotenv from 'dotenv';
 dotenv.config();
+import adjustBalance from "./helpers/adjust-balance.js";
 //require('dotenv').config()
 const APIKEYERC = process.env.API_KEY_ERC;
 const ENDPOINTERC = "https://api.etherscan.io/api";
@@ -20,14 +21,6 @@ const ERC20ABI = JSON.parse(JSONStr);
 //const ERC20ABI = require("./ERC20ABI.json")
 const rpcURL = `https://mainnet.infura.io/v3/${process.env.API_KEY_INFURA_MAINNET}`;
 const web3 = new Web3(rpcURL);
-const adjustBalance = (balance, decimals) => {
-    if (balance.length <= decimals) {
-        return "0." + 0 * (decimals - balance.length) + balance;
-    }
-    else {
-        return (balance.slice(0, -1 * decimals) + "." + balance.slice(-1 * decimals));
-    }
-};
 function getTokensERC20({ address, detailed = false, metadata = false, startblock = 0, existingERC20Tokens = [] }) {
     return __awaiter(this, void 0, void 0, function* () {
         //get contract address of ERC20 tokens that the account currently hodl
